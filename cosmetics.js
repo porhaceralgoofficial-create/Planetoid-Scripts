@@ -1,39 +1,52 @@
-// cosmetics.js - A cosmetics management system with a menu interface and particle effects
+// Cosmetics Management System
 
-// Particle effects for pickaxe
-function createPickaxeEffect() {
-    const particleSystem = new ParticleSystem();
-    // Add some particles
-    particleSystem.addParticles({ type: 'sparkle', count: 100 });
-    // Set up effect
-    particleSystem.setPosition(player.position);
-    particleSystem.start();
-}
-
-// Particle effects for walk trails
-function createWalkTrailEffect() {
-    const trailEffect = new TrailEffect();
-    trailEffect.setColor('blue');
-    trailEffect.setLength(10);
-    // Link the effect to player movement
-    player.onMove = () => {
-        trailEffect.addPoint(player.position);
-        trailEffect.display();
-    };
-}
-
-// Menu interface for cosmetics management
-function openCosmeticsMenu() {
-    const menu = new Menu();
-    menu.addOption('Pickaxe Effects', createPickaxeEffect);
-    menu.addOption('Walk Trail Effects', createWalkTrailEffect);
-    menu.addOption('Close Menu', menu.close);
-    menu.display();
-}
-
-// Event listener to open the menu
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'C') {
-        openCosmeticsMenu();
+class CosmeticsManager {
+    constructor() {
+        this.pickaxeEffects = [];
+        this.walkTrailEffects = [];
+        this.menu = {};
     }
-});
+
+    addPickaxeEffect(effect) {
+        this.pickaxeEffects.push(effect);
+    }
+
+    removePickaxeEffect(effect) {
+        const index = this.pickaxeEffects.indexOf(effect);
+        if (index > -1) {
+            this.pickaxeEffects.splice(index, 1);
+        }
+    }
+
+    addWalkTrailEffect(effect) {
+        this.walkTrailEffects.push(effect);
+    }
+
+    removeWalkTrailEffect(effect) {
+        const index = this.walkTrailEffects.indexOf(effect);
+        if (index > -1) {
+            this.walkTrailEffects.splice(index, 1);
+        }
+    }
+
+    setMenu(menu) {
+        this.menu = menu;
+    }
+
+    openMenu() {
+        console.log('Menu opened:', this.menu);
+    }
+
+    closeMenu() {
+        console.log('Menu closed');
+    }
+}
+
+// Example usage
+const cosmeticsManager = new CosmeticsManager();
+
+cosmeticsManager.addPickaxeEffect('Shiny');
+cosmeticsManager.addWalkTrailEffect('Sparkle');
+cosmeticsManager.setMenu({ title: 'Cosmetics Menu', options: [] });
+
+cosmeticsManager.openMenu();
