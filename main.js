@@ -28,6 +28,8 @@ import './pets.js';
 import './pet-xp.js';
 import './pet-visuals.js';
 import './key-system.js';
+import './cosmetic-vouchers.js';
+import './cosmetics.js';
 import { ActionFormData, MessageFormData, ModalFormData } from "@minecraft/server-ui";
 import { getBalance, getTokens, setBalance, setTokens, addPrestige, formatPrestige, getPrestige, setPrestige } from "./sidebar.js";
 
